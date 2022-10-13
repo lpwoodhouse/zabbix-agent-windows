@@ -1,9 +1,9 @@
 # lpwoodhouse.zabbix-agent-win/defaults/main.yml
 ---
-zbx_agent2: false         # Zabbix agent 2 is a new generation of Zabbix agent and may be used in place of Zabbix agent
-zbx_agent_release: 6.2.3  # See https://www.zabbix.com/download_agents for valid/latest release versions
-zbx_server: 192.168.1.1   # IP Addr or FQDN of your Zabbix server
-zbx_passive_port: 10050   # Zabbix server will request agent on this port
-zbx_active_port: 10051    # Active agent will request Zabbix server on this port
-download_dest: '%USERPROFILE%\Downloads'     # Direcotry for the downloaded Zabbix agent .zip archive
-install_dest: 'C:\zabbix'                    # Directory for the Zabbix agent executables and .conf files
+zbx_agent2: false
+zbx_agent_release: 6.2.3
+zbx_server: 192.168.1.1
+zbx_passive_port: 10050
+zbx_active_port: 10051
+download_dest: '%USERPROFILE%\Downloads'
+install_dest: 'C:\zabbix'
