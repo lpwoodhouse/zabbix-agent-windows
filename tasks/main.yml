@@ -2,7 +2,7 @@
 # building a valid download url relies on a valid zbx_agent_release variable
 - name: test download url
   win_uri:
-    url: "https://cdn.zabbix.com/zabbix/binaries/stable/{{zbx_agent_release[:3]}}/{{zbx_agent_release}}/zabbix_agent{{'2' if (zbx_agent2|bool) else ''}}-{{zbx_agent_release}}-windows-amd64{{'-static' if (zbx_agent2|bool) else ''}}.zip"
+    url: "https://cdn.zabbix.com/zabbix/binaries/stable/{{ zbx_agent_release[:3] }}/{{ zbx_agent_release }}/zabbix_agent{{ '2' if (zbx_agent2|bool) else '' }}-{{ zbx_agent_release }}-windows-amd64{{ '-static' if (zbx_agent2|bool) else '' }}.zip"
     status_code: 200,404
   register: get_output
   changed_when: no
@@ -26,7 +26,7 @@
 - name: unzip zabbix agent
   win_unzip:
     src: "{{ download_result.dest }}"
-    dest: "{{ download_dest }}\\zabbix_agent{{'2' if (zbx_agent2|bool) else ''}}_files"
+    dest: "{{ download_dest }}\\zabbix_agent{{ '2' if (zbx_agent2|bool) else '' }}_files"
     delete_archive: yes
   register: unzip_result
 
@@ -49,7 +49,7 @@
 # apply required variables (zabbix server addr, ports, hostname etc.) to the agent configuration file
 - name: apply agent configuration vars
   win_lineinfile:
-    path: "{{ install_dest }}\\conf\\zabbix_agent{{'2' if (zbx_agent2|bool) else 'd'}}.conf"
+    path: "{{ install_dest }}\\conf\\zabbix_agent{{ '2' if (zbx_agent2|bool) else 'd' }}.conf"
     regex: "{{ item.exp }}"
     line: "{{ item.line }}"
   loop:
@@ -96,7 +96,7 @@
 # install the Zabbix Agent service
 - name: install zabbix agent as a service
   win_shell: |
-    {{ install_dest }}\bin\zabbix_agent{{'2' if (zbx_agent2|bool) else 'd'}}.exe -c {{ install_dest }}\conf\zabbix_agent{{'2' if (zbx_agent2|bool) else 'd'}}.conf -i
+    {{ install_dest }}\bin\zabbix_agent{{ '2' if (zbx_agent2|bool) else 'd' }}.exe -c {{ install_dest }}\conf\zabbix_agent{{ '2' if (zbx_agent2|bool) else 'd' }}.conf -i
   register: install_result
   notify: start zabbix agent
 
