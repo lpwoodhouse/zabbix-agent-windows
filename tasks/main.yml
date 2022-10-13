@@ -1,4 +1,3 @@
-# lpwoodhouse.zabbix-agent-win/tasks/main.yml
 ---
 # building a valid download url relies on a valid zbx_agent_release variable
 - name: test download url
