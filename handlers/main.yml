@@ -1,2 +1,6 @@
-# {{ role_name }}/handlers/main.yml
+# lpwoodhouse.zabbix-agent-win/handlers/main.yml
 ---
+- name: start zabbix agent
+  win_service:
+    name: "Zabbix Agent{{' 2' if (zbx_agent2|bool) else ''}}"
+    state: restarted

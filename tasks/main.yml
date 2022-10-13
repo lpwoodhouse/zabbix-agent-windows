@@ -1,2 +1,113 @@
-# {{ role_name }}/tasks/main.yml
+# lpwoodhouse.zabbix-agent-win/tasks/main.yml
 ---
+# building a valid download url relies on a valid zbx_agent_release variable
+- name: test download url
+  win_uri:
+    url: "https://cdn.zabbix.com/zabbix/binaries/stable/{{zbx_agent_release[:3]}}/{{zbx_agent_release}}/zabbix_agent{{'2' if (zbx_agent2|bool) else ''}}-{{zbx_agent_release}}-windows-amd64{{'-static' if (zbx_agent2|bool) else ''}}.zip"
+    status_code: 200,404
+  register: get_output
+  changed_when: no
+  failed_when: no
+
+# fail playbook run if the download url is not found (404 error)
+- name: error!
+  fail:
+    msg: Download url returned 404 not found. Ensure Zabbix agent release version is valid at https://www.zabbix.com/download_agents
+  when: get_output.status_code == 404
+
+# download the zabbix agent if download url is valid (200)
+- name: download zabbix agent
+  win_get_url:
+    url: "{{ get_output.url }}"
+    dest: "{{ download_dest }}"
+  register: download_result
+
+# extract contents and then delete zabbix agent archive
+# /zabbix_agent_files or /zabbix_agent2_files directory is created
+- name: unzip zabbix agent
+  win_unzip:
+    src: "{{ download_result.dest }}"
+    dest: "{{ download_dest }}\\zabbix_agent{{'2' if (zbx_agent2|bool) else ''}}_files"
+    delete_archive: yes
+  register: unzip_result
+
+# create install directory for zabbix agent executable and config files
+- name: create zabbix directory
+  win_file:
+    path: "{{ install_dest }}"
+    state: directory
+
+# copy zabbix agent executable and config files to install directory
+- name: copy zabbix files
+  win_copy:
+    src: "{{ item }}"
+    dest: "{{ install_dest }}"
+    remote_src: yes
+  loop:
+    - "{{ unzip_result.dest }}\\bin"
+    - "{{ unzip_result.dest }}\\conf"
+
+# apply required variables (zabbix server addr, ports, hostname etc.) to the agent configuration file
+- name: apply agent configuration vars
+  win_lineinfile:
+    path: "{{ install_dest }}\\conf\\zabbix_agent{{'2' if (zbx_agent2|bool) else 'd'}}.conf"
+    regex: "{{ item.exp }}"
+    line: "{{ item.line }}"
+  loop:
+    - { exp: '^Server=.+$', line: 'Server=0.0.0.0/0' }
+    - { exp: '^# ListenPort=.+$', line: 'ListenPort={{ zbx_passive_port }}' }
+    - { exp: '^ServerActive=.+$', line: 'ServerActive={{zbx_server}}:{{ zbx_active_port }}' }
+    - { exp: '^Hostname=.+$', line: 'Hostname={{ ansible_fqdn }}' }
+
+# check to see if a current Zabbix Agent service already exists
+- name: get service info
+  win_service:
+    name: "{{ item }}"
+  loop:
+    - Zabbix Agent
+    - Zabbix Agent 2
+  register: service_info
+
+# Uninstalls and removes the existing agent service if not the same as intended new agent service
+# Required if changing between zabbix_agent and zabbix_agent2
+- name: uninstall existing agent
+  win_shell: "{{ agent_path }} --uninstall"
+  loop: "{{ service_info.results }}"
+  vars:
+    # regex_replace is required to remove quotes inside the path
+    regex: "[`'\"]"
+    replace: ""
+    agent_path: "{{ item.path | regex_replace(regex, replace) }}"
+    new_agent_name: "{{ 'Zabbix Agent 2' if (zbx_agent2|bool) else 'Zabbix Agent' }}"
+  when: (item.exists and item.name != new_agent_name)
+  no_log: true
+
+# This task is required to remove the disabled 'Zabbix Agent 2' service from the services console
+# 'failed_when: false' is to prevent failure when removing 'Zabbix Agent' which is successfully removed (not disabled) by the previous task
+- name: remove exisiting agent service
+  win_service: name="{{ item.name }}" state=absent
+  loop: "{{ service_info.results }}"
+  vars:
+    new_agent_name: "{{ 'Zabbix Agent 2' if (zbx_agent2|bool) else 'Zabbix Agent' }}"
+  when: (item.exists and item.name != new_agent_name)
+  failed_when: false
+  changed_when: true
+  no_log: true  
+
+# install the Zabbix Agent service
+- name: install zabbix agent as a service
+  win_shell: |
+    {{ install_dest }}\bin\zabbix_agent{{'2' if (zbx_agent2|bool) else 'd'}}.exe -c {{ install_dest }}\conf\zabbix_agent{{'2' if (zbx_agent2|bool) else 'd'}}.conf -i
+  register: install_result
+  notify: start zabbix agent
+
+# create an inbound firewall rule for zabbix server to query agent on passive port
+- name: configure firewall rule
+  win_firewall_rule:
+    name: zabbix_inbound
+    direction: in
+    localport: "{{ zbx_passive_port }}"
+    protocol: tcp    
+    action: allow
+    state: present
+    enabled: yes

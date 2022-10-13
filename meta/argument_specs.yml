@@ -1,13 +1,35 @@
-# {{ role_name }}/meta/argument_specs.yml
+# lpwoodhouse.zabbix-agent-win/meta/argument_specs.yml
 # see https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#role-argument-validation
 ---
-#argument_specs:
-#  # {{ role_name }}/tasks/main.yml entry point
-#  main:
-#    short_description: The main entry point for the {{ role_name }} role.
-#    options:
-#      <variable>:
-#        type: "int" # int,str,bool,float,list,dict,raw
-#        required: false # true,false
-#        default: 10050 # use if required is false
-#        description: "This should be a port value from 1000-65535"
+argument_specs:
+  main:
+    short_description: The main entry point for the lpwoodhouse.zabbix-agent-win role.
+    options:
+      zbx_agent2:
+        type: "bool"
+        required: yes
+        description: "This should be a boolean value true/false yes/no"
+      zbx_agent_release:
+        type: "str"
+        required: yes
+        description: "This should be a valid release version of the Zabbix Agent"
+      zbx_server:
+        type: "str"
+        required: yes
+        description: "This should be an ip address or fqdn for the Zabbix server"
+      zbx_passive_port:
+        type: "int"
+        required: yes
+        description: "This should be a port value from 1000-65535"
+      zbx_active_port:
+        type: "int"
+        required: yes
+        description: "This should be a port value from 1000-65535"
+      download_dest:
+        type: "str"
+        required: yes
+        description: "This should be an existing writable directory path on the Windows host"
+      install_dest:
+        type: "str"
+        required: yes
+        description: "This should be a directory path on the Windows host"

@@ -1,36 +1,17 @@
-# {{ role_name }}/meta/main.yml
+# lpwoodhouse.zabbix-agent-win/meta/main.yml
 ---
 dependencies: []
 #  - role:
 #    vars:
 
 galaxy_info:
-  role_name: {{ role_name }}
+  role_name: lpwoodhouse.zabbix-agent-win
   author: Lee Woodhouse
-  description: This role installs/configures...
+  description: This role downloads, installs and configures the Zabbix Agent (or Zabbix Agent 2) on Windows.
   company: www.leewoodhouse.com
   license: MIT
   min_ansible_version: 2.10
   platforms: # platform list available at https://galaxy.ansible.com/api/v1/platforms/?name=EL
-    - name: EL
-      versions:
-        - 7
-        - 8
-        - 9
-    - name: Debian
-      versions:
-        - buster
-        - bullseye
-    - name: Ubuntu
-      versions:
-        - bionic
-        - focal
-        - jammy
-    - name: SLES
-      versions:
-        - 12
-        - 12SP1
-        - 15
     - name: Windows
       versions:
         - 2012R2
@@ -38,6 +19,6 @@ galaxy_info:
         - 2019
   galaxy_tags:
     - monitoring
-    - containers
-    - docker
-    - etc...
+    - zabbix
+    - windows
+    - agent
