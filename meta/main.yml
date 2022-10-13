@@ -1,8 +1,5 @@
-# lpwoodhouse.zabbix-agent-win/meta/main.yml
 ---
 dependencies: []
-#  - role:
-#    vars:
 
 galaxy_info:
   author: Lee Woodhouse
