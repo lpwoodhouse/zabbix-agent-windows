@@ -5,8 +5,8 @@
     url: "https://cdn.zabbix.com/zabbix/binaries/stable/{{ zbx_agent_release[:3] }}/{{ zbx_agent_release }}/zabbix_agent{{ '2' if (zbx_agent2|bool) else '' }}-{{ zbx_agent_release }}-windows-amd64{{ '-static' if (zbx_agent2|bool) else '' }}.zip"
     status_code: 200,404
   register: get_output
-  changed_when: no
-  failed_when: no
+  changed_when: false
+  failed_when: false
 
 # fail playbook run if the download url is not found (404 error)
 - name: error!
@@ -27,7 +27,7 @@
   win_unzip:
     src: "{{ download_result.dest }}"
     dest: "{{ download_dest }}\\zabbix_agent{{ '2' if (zbx_agent2|bool) else '' }}_files"
-    delete_archive: yes
+    delete_archive: true
   register: unzip_result
 
 # create install directory for zabbix agent executable and config files
@@ -41,7 +41,7 @@
   win_copy:
     src: "{{ item }}"
     dest: "{{ install_dest }}"
-    remote_src: yes
+    remote_src: true
   loop:
     - "{{ unzip_result.dest }}\\bin"
     - "{{ unzip_result.dest }}\\conf"
@@ -109,4 +109,4 @@
     protocol: tcp    
     action: allow
     state: present
-    enabled: yes
+    enabled: true
