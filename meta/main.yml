@@ -3,3 +3,39 @@
 dependencies: []
 
 galaxy_info:
+  role_name: <role_name>
+  author: Lee Woodhouse
+  description: <description>
+  company: www.leewoodhouse.com
+  license: MIT
+  min_ansible_version: 2.10
+  platforms: # platform list available at https://galaxy.ansible.com/api/v1/platforms/?name=EL
+    - name: EL
+      versions:
+        - 7
+        - 8
+        - 9
+    - name: Debian
+      versions:
+        - buster
+        - bullseye
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+        - jammy
+    - name: SLES
+      versions:
+        - 12
+        - 12SP1
+        - 15
+    - name: Windows
+      versions:
+        - 2012R2
+        - 2016
+        - 2019
+  galaxy_tags:
+    - monitoring
+    - containers
+    - docker
+    - etc...
