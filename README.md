@@ -15,7 +15,7 @@ collections:
 
 ## Role Variables
 
-The default values for required variables are listed below (see [`defaults/main.yml`](defaults/main.yml)). Ensure they are overwritten with the values you require. See [here](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable) for guidence.
+The values for default variables are listed below (see [`defaults/main.yml`](defaults/main.yml)). Ensure they are overwritten with the values you require. See [here](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable) for guidence on variable placement.
 
 ## Dependencies
 
