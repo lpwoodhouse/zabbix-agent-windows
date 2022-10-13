@@ -1,4 +1,3 @@
-# lpwoodhouse.zabbix-agent-win/handlers/main.yml
 ---
 - name: start zabbix agent
   win_service:
