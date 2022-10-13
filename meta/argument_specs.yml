@@ -1,27 +1,13 @@
 # {{ role_name }}/meta/argument_specs.yml
+# see https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#role-argument-validation
 ---
-argument_specs:
-  # {{ role_name }}/tasks/main.yml entry point
-  main:
-    short_description: The main entry point for the {{ role_name }} role.
-    options:
-      myapp_int:
-        type: "int"
-        required: false
-        default: 42
-        description: "The integer value, defaulting to 42."
-
-      myapp_str:
-        type: "str"
-        required: true
-        description: "The string value"
-
-  # roles/maypp/tasks/alternate.yml entry point
-  alternate:
-    short_description: The alternate entry point for the myapp role.
-    options:
-      myapp_int:
-        type: "int"
-        required: false
-        default: 1024
-        description: "The integer value, defaulting to 1024."
+#argument_specs:
+#  # {{ role_name }}/tasks/main.yml entry point
+#  main:
+#    short_description: The main entry point for the {{ role_name }} role.
+#    options:
+#      <variable>:
+#        type: "int" # int,str,bool,float,list,dict,raw
+#        required: false # true,false
+#        default: 10050 # use if required is false
+#        description: "This should be a port value from 1000-65535"
