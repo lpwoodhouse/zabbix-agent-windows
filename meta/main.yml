@@ -1,6 +1,8 @@
 # <role_name>/meta/main.yml
 ---
 dependencies: []
+#  - role: <dependency_role_name>
+#    vars:
 
 galaxy_info:
   role_name: <role_name>
