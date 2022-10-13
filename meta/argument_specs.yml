@@ -1,4 +1,3 @@
-# lpwoodhouse.zabbix-agent-win/meta/argument_specs.yml
 # see https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html#role-argument-validation
 ---
 argument_specs:
