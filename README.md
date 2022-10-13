@@ -40,7 +40,7 @@ None
 ```yaml
 - hosts: all
   roles:
-    - lpwoodhouse.zabbix-agent-windows
+    - lpwoodhouse.zabbix_agent_windows
 ```
 
 ## Author Information
