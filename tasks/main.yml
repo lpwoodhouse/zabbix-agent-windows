@@ -55,7 +55,7 @@
   loop:
     - { exp: '^Server=.+$', line: 'Server=0.0.0.0/0' }
     - { exp: '^# ListenPort=.+$', line: 'ListenPort={{ zbx_passive_port }}' }
-    - { exp: '^ServerActive=.+$', line: 'ServerActive={{zbx_server}}:{{ zbx_active_port }}' }
+    - { exp: '^ServerActive=.+$', line: 'ServerActive={{ zbx_server }}:{{ zbx_active_port }}' }
     - { exp: '^Hostname=.+$', line: 'Hostname={{ ansible_fqdn }}' }
 
 # check to see if a current Zabbix Agent service already exists
