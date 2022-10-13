@@ -1,3 +1,5 @@
 # <role_name>/meta/main.yml
 ---
-dependencies:
+dependencies: []
+
+galaxy_info:
