@@ -1,4 +1,3 @@
-# lpwoodhouse.zabbix-agent-win/defaults/main.yml
 ---
 zbx_agent2: false
 zbx_agent_release: 6.2.3
