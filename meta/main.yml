@@ -5,7 +5,7 @@ dependencies: []
 #    vars:
 
 galaxy_info:
-  role_name: ansible-role-zabbix-agent-win
+  role_name: lpwoodhouse.ansible-role-zabbix-agent-win
   author: Lee Woodhouse
   description: This role downloads, installs and configures the Zabbix Agent (or Zabbix Agent 2) on Windows.
   company: www.leewoodhouse.com
