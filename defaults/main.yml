@@ -1,2 +1,2 @@
-# <role_name>/defaults/main.yml
+# {{ role_name }}/defaults/main.yml
 ---

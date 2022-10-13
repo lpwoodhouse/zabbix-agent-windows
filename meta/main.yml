@@ -1,13 +1,13 @@
-# <role_name>/meta/main.yml
+# {{ role_name }}/meta/main.yml
 ---
 dependencies: []
-#  - role: <dependency_role_name>
+#  - role:
 #    vars:
 
 galaxy_info:
-  role_name: <role_name>
+  role_name: {{ role_name }}
   author: Lee Woodhouse
-  description: <description>
+  description: This role installs/configures...
   company: www.leewoodhouse.com
   license: MIT
   min_ansible_version: 2.10

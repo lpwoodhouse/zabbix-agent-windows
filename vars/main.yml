@@ -1,2 +1,2 @@
-# <role_name>/vars/main.yml
+# {{ role_name }}/vars/main.yml
 ---

@@ -1,2 +1,2 @@
-# <role_name>/handlers/main.yml
+# {{ role_name }}/handlers/main.yml
 ---

@@ -4,7 +4,7 @@
 
 ## Description
 
-This playbook installs/configures......
+This role installs/configures...
 
 ## Requirements
 
