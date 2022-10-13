@@ -6,29 +6,29 @@ argument_specs:
     options:
       zbx_agent2:
         type: "bool"
-        required: yes
+        required: true
         description: "This should be a boolean value true/false yes/no"
       zbx_agent_release:
         type: "str"
-        required: yes
+        required: true
         description: "This should be a valid release version of the Zabbix Agent"
       zbx_server:
         type: "str"
-        required: yes
+        required: true
         description: "This should be an ip address or fqdn for the Zabbix server"
       zbx_passive_port:
         type: "int"
-        required: yes
+        required: true
         description: "This should be a port value from 1000-65535"
       zbx_active_port:
         type: "int"
-        required: yes
+        required: true
         description: "This should be a port value from 1000-65535"
       download_dest:
         type: "str"
-        required: yes
+        required: true
         description: "This should be an existing writable directory path on the Windows host"
       install_dest:
         type: "str"
-        required: yes
+        required: true
         description: "This should be a directory path on the Windows host"
