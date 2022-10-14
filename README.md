@@ -5,6 +5,9 @@
 ## Description
 
 This role downloads, installs and configures the Zabbix Agent (or Zabbix Agent 2) on Windows.
+After installation the Zabbix Agent (or Zabbix Agent 2) service will be enabled and started.
+A Windows Firewall rule (zabbix_inbound) will be created to allow traffic on the assigned passive port.
+The Ansible role will also remove an existing Zabbix agent before installing. This is useful for changing between Zabbix Agent and Zabbix Agent 2.
 
 ## Requirements
 
