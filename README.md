@@ -1,6 +1,7 @@
 # **Ansible Role:** Zabbix Agent (Windows)
-
-[![License](https://img.shields.io/badge/License-MIT-green?sytle=flat)](LICENSE)
+[![Ansible Role](https://img.shields.io/badge/ansible%20role-lpwoodhouse.zabbix_agent_windows-blue.svg)](https://galaxy.ansible.com/lpwoodhouse/zabbix_agent_windows/)
+[![GitHub tag](https://img.shields.io/github/tag/lpwoodhouse/zabbix-agent-windows.svg)](https://github.com/lpwoodhouse/zabbix-agent-windows/tags)
+[![License](https://img.shields.io/badge/license-MIT-green?sytle=flat)](LICENSE)
 
 ## Description
 
